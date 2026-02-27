@@ -174,3 +174,4 @@ Frontend: http://localhost:5173 (Vite proxies `/api` to the Django backend).
 - React 18.x
 - Vite 5.x
 "# Hallow-ECommerce" 
+"# Hallow-ECommerce" 

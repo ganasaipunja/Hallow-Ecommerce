@@ -1,0 +1,52 @@
+=== BACKEND ===
+backend/
+├── manage.py
+├── requirements.txt
+├── schema.sql
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── management/
+│   │   │   ├── __init__.py
+│   │   │   ├── commands/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── seed_products.py
+│   ├── config/
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+=== FRONTEND ===
+frontend/
+├── index.html
+├── package-lock.json
+├── package.json
+├── vite.config.js
+│   ├── public/
+│   │   ├── abouthallow.png
+│   │   ├── design_1.png
+│   │   ├── hallow.png
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── Layout.jsx
+│   │   ├── api.js
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   ├── pages/
+│   │   │   ├── About.css
+│   │   │   ├── About.jsx
+│   │   │   ├── Cart.css
+│   │   │   ├── Cart.jsx
+│   │   │   ├── Catalog.css
+│   │   │   ├── Catalog.jsx
+│   │   │   ├── Home.css
+│   │   │   ├── Login.jsx
+│   │   │   ├── OrderSummary.jsx
+│   │   │   ├── home.jsx
+│   │   │   ├── login.css
+│   │   ├── style/

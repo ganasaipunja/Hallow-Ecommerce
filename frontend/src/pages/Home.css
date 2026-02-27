@@ -1,0 +1,257 @@
+/* =========================================
+   HOME PAGE CONTAINER
+   ========================================= */
+.home-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   1. HERO SECTION
+   ========================================= */
+.hero-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 8%;
+  background: linear-gradient(90deg, rgba(38, 34, 39, 0.9) 0%, rgba(15, 23, 42, 0.4) 100%), 
+              url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070') center/cover no-repeat;
+              color: white;
+  margin-bottom: 2rem;
+}
+
+.hero-content {
+  max-width: 600px;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.badge {
+  background: #10b981;
+  color: rgb(245, 245, 245);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin: 1.5rem 0;
+  font-weight: 800;
+  
+  background: linear-gradient(45deg, #2563eb, #9333ea, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  color: #e2e8f0;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+}
+
+.cta-button {
+  background: #2563eb;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.secondary-button {
+  border: 2px solid white;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.cta-button:hover, .secondary-button:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+/* =========================================
+   2. DYNAMIC BANNER SLIDER
+   ========================================= */
+.banner-slider {
+  position: relative;
+  height: 500px;
+  width: 92%;          
+  max-width: 1400px;    
+  margin: 3rem auto;    
+  background: #3b343b;
+  border-radius: 24px;  
+  overflow: hidden;     
+  
+  box-shadow: 0 0 25px rgba(127, 25, 172, 0.4), 
+              0 0 50px rgba(65, 33, 33, 0.2);
+              
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle "glass" border */
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 7, 7, 0.4); /* Darkens banner for text clarity */
+}
+
+.slide-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  color: white;
+}
+
+.slide-content h2 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Soft text glow */
+}
+
+.banner-btn {
+  background: #10b981;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: #2563eb;
+  width: 30px;
+  border-radius: 10px;
+}
+
+/* =========================================
+   3. FEATURED PRODUCTS GRID
+   ========================================= */
+.featured-section {
+  padding: 4rem 8%;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2.5rem;
+}
+
+.view-all {
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.product-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.home-product-card {
+  background: lab(94.14% -11.25 -3.8);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.home-product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(152, 13, 165, 0.1);
+}
+
+.home-product-card img {
+  height: 180px;
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.home-product-card h4 {
+  font-size: 1.1rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.home-price {
+  color: #0db980;
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.details-link {
+  font-size: 0.85rem;
+  color: #1557b4;
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+/* =========================================
+   ANIMATIONS & RESPONSIVE
+   ========================================= */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  .banner-slider { height: 350px; }
+  .slide-content h2 { font-size: 1.8rem; }
+  .hero-section { padding: 3rem 5%; }
+}

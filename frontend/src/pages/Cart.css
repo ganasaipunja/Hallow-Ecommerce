@@ -1,0 +1,189 @@
+/* =========================================
+   CART PAGE LAYOUT
+   ========================================= */
+
+.container h1 {
+  margin: 2rem 0;
+  font-size: 2rem;
+  color: #1e293b;
+  font-weight: 800;
+}
+
+/* Card Styling */
+.card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   CART ITEMS TABLE/ROWS
+   ========================================= */
+
+.cart-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-row:last-child {
+  border-bottom: none;
+}
+
+.cart-row strong {
+  color: #334155;
+  font-size: 1rem;
+}
+
+/* Quantity Controls */
+.cart-row button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #475569;
+  transition: all 0.2s;
+}
+
+.cart-row button:hover {
+  background: #f8fafc;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.cart-row span {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Remove Link */
+.cart-row button[style*="color: red"] {
+  margin-top: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.cart-row button[style*="color: red"]:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* =========================================
+   SHIPPING & PAYMENT FORMS
+   ========================================= */
+
+h3 {
+  font-size: 1.2rem;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #2563eb;
+  padding-left: 12px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Radio Buttons */
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+}
+
+/* =========================================
+   SUMMARY & CHECKOUT
+   ========================================= */
+
+.total-summary {
+  text-align: right;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.total-summary p {
+  font-size: 1.5rem;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+
+.total-summary .primary {
+  background: #10b981; /* Green for success/checkout */
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+}
+
+.total-summary .primary:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.total-summary .primary:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Error Message inside Cart */
+.error {
+  background: #fff1f2 !important;
+  color: #e11d48 !important;
+  border: 1px solid #fecdd3 !important;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cart-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .cart-row div {
+    flex: unset !important;
+    width: 100%;
+  }
+
+  .cart-row div[style*="text-align: right"] {
+    text-align: center !important;
+  }
+}

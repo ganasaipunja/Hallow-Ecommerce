@@ -129,3 +129,15 @@ class OrderSerializer(serializers.ModelSerializer):
             'id', 'user', 'total_amount', 'status', 'created_at', 
             'items', 'street', 'city', 'pincode', 'payment_method'
         )
+
+# In backend/api/serializers.py
+class UserSerializer(serializers.ModelSerializer):
+    groups = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'groups']
+        

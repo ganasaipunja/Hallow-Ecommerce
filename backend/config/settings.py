@@ -72,7 +72,7 @@ if os.environ.get('MYSQL_DATABASE'):
             'USER': os.environ.get('MYSQL_USER'),
             'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
             'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': os.environ.get('MYSQL_PORT', '28747'), # Aiven default port
+            'PORT': os.environ.get('MYSQL_PORT'), # Aiven default port
             'OPTIONS': {
                 'charset': 'utf8mb4',
                 # SSL Error (2026) FIX: Self-signed certificate check ni skip chestundi

@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import Catalog from './pages/Catalog'
 import Cart from './pages/Cart'
 import OrderSummary from './pages/OrderSummary'
-import Home from './pages/home'
+import Home from './pages/Home'
 import About from './pages/About'; // Adjust the path based on where you saved the file
 
 function App() {

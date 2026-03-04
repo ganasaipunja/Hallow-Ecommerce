@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { getHome } from '../api'; 
+import { getHome } from '../api';
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
   const [banners, setBanners] = useState([]);
   const [currentBanner, setCurrentBanner] = useState(0);
   const [loading, setLoading] = useState(true);
-  
+
   // Use your computer's IP
-  const API_URL = "https://hallow-backend.onrender.com";
+  const API_URL = import.meta.env.DEV ? "http://127.0.0.1:8000" : "https://hallow-backend.onrender.com";
 
   useEffect(() => {
     if (banners.length > 0) {
@@ -59,12 +59,12 @@ export default function Home() {
       {banners.length > 0 && (
         <section className="banner-slider">
           {banners.map((bn, index) => (
-            <div 
-              key={bn.id || index} 
+            <div
+              key={bn.id || index}
               className={`slide ${index === currentBanner ? 'active' : ''}`}
-              style={{ 
+              style={{
                 // FIXED: Using the helper function for clean URLs
-                backgroundImage: `url(${getImageUrl(bn.image)})` 
+                backgroundImage: `url(${getImageUrl(bn.image)})`
               }}
             >
               <div className="slide-content">
@@ -73,11 +73,11 @@ export default function Home() {
               </div>
             </div>
           ))}
-          
+
           <div className="slider-dots">
             {banners.map((_, i) => (
-              <span 
-                key={i} 
+              <span
+                key={i}
                 className={i === currentBanner ? 'dot active' : 'dot'}
                 onClick={() => setCurrentBanner(i)}
               ></span>

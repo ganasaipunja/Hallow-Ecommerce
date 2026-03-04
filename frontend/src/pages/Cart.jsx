@@ -5,8 +5,8 @@ import { getCart, cartRemove, orderSummary, cartUpdate } from '../api'
 
 export default function Cart({ token }) {
   // UPDATED: Use your computer's IP instead of 127.0.0.1
-  const API_URL = "https://hallow-backend.onrender.com";
-  
+  const API_URL = import.meta.env.DEV ? "http://127.0.0.1:8000" : "https://hallow-backend.onrender.com";
+
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -45,11 +45,11 @@ export default function Cart({ token }) {
   }
 
   async function handleUpdateQuantity(itemId, newQuantity) {
-    if (newQuantity < 1) return; 
+    if (newQuantity < 1) return;
     setError('');
     try {
       await cartUpdate(token, itemId, newQuantity);
-      setItems(prev => prev.map(item => 
+      setItems(prev => prev.map(item =>
         item.id === itemId ? { ...item, quantity: newQuantity } : item
       ));
     } catch (err) {
@@ -59,8 +59,8 @@ export default function Cart({ token }) {
 
   async function handleCheckout() {
     if (!address.street || !address.city || !address.pincode) {
-        setError('Please fill in all shipping details');
-        return;
+      setError('Please fill in all shipping details');
+      return;
     }
     setError('')
     setSubmitting(true)
@@ -88,7 +88,7 @@ export default function Cart({ token }) {
     <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
       <h1>Shopping Cart</h1>
       {error && <p className="error" style={{ color: 'red', background: '#fee', padding: '10px', borderRadius: '4px' }}>{error}</p>}
-      
+
       {items.length === 0 ? (
         <div className="card"><p>Your cart is empty.</p></div>
       ) : (
@@ -98,11 +98,11 @@ export default function Cart({ token }) {
               <div key={i.id} className="cart-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px 0', borderBottom: '1px solid #eee' }}>
                 <div style={{ display: 'flex', alignItems: 'center', flex: 2 }}>
                   <div style={{ width: '60px', height: '60px', marginRight: '1rem', background: '#f9f9f9', borderRadius: '4px', overflow: 'hidden' }}>
-                    <img 
+                    <img
                       // FIXED: Using helper function for the IP-based image path
-                      src={getImageUrl(i.product?.image)} 
-                      alt={i.product?.name} 
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                      src={getImageUrl(i.product?.image)}
+                      alt={i.product?.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                   </div>
                   <strong>{i.product?.name}</strong>
@@ -129,30 +129,30 @@ export default function Cart({ token }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '5px' }}>Street Address</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Flat No, Street, Area"
-                  value={address.street} 
-                  onChange={e => setAddress({...address, street: e.target.value})} 
+                  value={address.street}
+                  onChange={e => setAddress({ ...address, street: e.target.value })}
                   style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                 />
               </div>
               <div style={{ display: 'flex', gap: '15px' }}>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '5px' }}>City</label>
-                  <input 
-                    type="text" 
-                    value={address.city} 
-                    onChange={e => setAddress({...address, city: e.target.value})} 
+                  <input
+                    type="text"
+                    value={address.city}
+                    onChange={e => setAddress({ ...address, city: e.target.value })}
                     style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                   />
                 </div>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '5px' }}>Pincode</label>
-                  <input 
-                    type="text" 
-                    value={address.pincode} 
-                    onChange={e => setAddress({...address, pincode: e.target.value})} 
+                  <input
+                    type="text"
+                    value={address.pincode}
+                    onChange={e => setAddress({ ...address, pincode: e.target.value })}
                     style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
                   />
                 </div>
@@ -165,21 +165,21 @@ export default function Cart({ token }) {
             <h3 style={{ marginTop: 0 }}>Payment Method</h3>
             <div style={{ display: 'flex', gap: '20px' }}>
               <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  name="payment" 
-                  checked={paymentMethod === 'cod'} 
-                  onChange={() => setPaymentMethod('cod')} 
-                /> 
+                <input
+                  type="radio"
+                  name="payment"
+                  checked={paymentMethod === 'cod'}
+                  onChange={() => setPaymentMethod('cod')}
+                />
                 Cash on Delivery
               </label>
               <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <input 
-                  type="radio" 
-                  name="payment" 
-                  checked={paymentMethod === 'online'} 
-                  onChange={() => setPaymentMethod('online')} 
-                /> 
+                <input
+                  type="radio"
+                  name="payment"
+                  checked={paymentMethod === 'online'}
+                  onChange={() => setPaymentMethod('online')}
+                />
                 Online Payment
               </label>
             </div>
@@ -189,9 +189,9 @@ export default function Cart({ token }) {
             <p style={{ fontSize: '1.4rem', margin: '0 0 15px 0' }}>
               <strong>Total Amount: ₹{total.toFixed(2)}</strong>
             </p>
-            <button 
-              className="primary" 
-              onClick={handleCheckout} 
+            <button
+              className="primary"
+              onClick={handleCheckout}
               disabled={submitting}
               style={{ padding: '12px 30px', fontSize: '1.1rem', cursor: 'pointer' }}
             >

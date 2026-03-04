@@ -1,4 +1,4 @@
-const BASE = 'https://hallow-backend.onrender.com/api';
+const BASE = import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : 'https://hallow-backend.onrender.com/api';
 
 function headers(token) {
   const h = { 'Content-Type': 'application/json' };
@@ -33,13 +33,13 @@ export async function login(body) {
     headers: headers(),
     body: JSON.stringify(body),
   });
-  
+
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
     throw new Error(data.error || data.non_field_errors?.[0] || 'Login failed');
   }
-  return data; 
+  return data;
 }
 
 export async function otpSend(identifier) {

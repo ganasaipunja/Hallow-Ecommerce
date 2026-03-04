@@ -7,7 +7,7 @@ export default function OrderSummary({ token }) {
   const [error, setError] = useState('')
 
   // UPDATED: Your computer's IP
-  const API_URL = "http://192.168.16.13:8000";
+  const API_URL = import.meta.env.DEV ? "http://127.0.0.1:8000" : "https://hallow-backend.onrender.com";
 
   // Helper for clean image paths
   const getImageUrl = (path) => {
@@ -32,21 +32,21 @@ export default function OrderSummary({ token }) {
   return (
     <div className="container" style={{ maxWidth: '800px' }}>
       <h1>My Orders</h1>
-      
+
       {orders.length === 0 ? (
         <div className="card"><p>You haven't placed any orders yet.</p></div>
       ) : (
         <div className="orders-list">
           {orders.map((order) => (
             <div key={order.id} className="order-card" style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '12px', marginBottom: '25px', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
-              
+
               <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #f4f4f4', paddingBottom: '12px', marginBottom: '15px' }}>
                 <div>
                   <strong style={{ fontSize: '1.1rem' }}>Order #HLW{order.id}</strong>
                   <div style={{ fontSize: '0.85rem', color: '#888' }}>Placed on {new Date(order.created_at).toLocaleDateString()}</div>
                 </div>
-                <span style={{ 
-                  background: order.status === 'pending' ? '#fff3cd' : '#d4edda', 
+                <span style={{
+                  background: order.status === 'pending' ? '#fff3cd' : '#d4edda',
                   color: order.status === 'pending' ? '#856404' : '#155724',
                   padding: '5px 12px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold', alignSelf: 'center'
                 }}>
@@ -73,10 +73,10 @@ export default function OrderSummary({ token }) {
               <div className="order-items">
                 {order.items?.map((item) => (
                   <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <img 
+                    <img
                       // FIXED: Now uses the helper function for network visibility
-                      src={getImageUrl(item.product_image)} 
-                      alt={item.product_name} 
+                      src={getImageUrl(item.product_image)}
+                      alt={item.product_name}
                       style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px' }}
                       onError={(e) => { e.target.src = 'https://placehold.co/60x60?text=Item'; }}
                     />

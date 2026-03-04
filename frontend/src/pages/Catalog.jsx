@@ -10,11 +10,11 @@ export default function Catalog({ token }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [addingId, setAddingId] = useState(null)
-  
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const API_URL = "https://hallow-backend.onrender.com";
+  const API_URL = import.meta.env.DEV ? "http://127.0.0.1:8000" : "https://hallow-backend.onrender.com";
 
   const getImageUrl = (path) => {
     if (!path) return "";
@@ -74,7 +74,7 @@ export default function Catalog({ token }) {
 
   return (
     <div className="container">
-      
+
       {/* --- DETAIL VIEW (SPOTLIGHT) --- */}
       {selectedProduct && (
         <div className="product-detail-section">
@@ -82,16 +82,16 @@ export default function Catalog({ token }) {
             <button className="close-btn" onClick={() => setSelectedProduct(null)}>×</button>
             <div className="detail-split">
               <div className="detail-left">
-                <img 
-                  src={getImageUrl(selectedProduct.image)} 
-                  alt={selectedProduct.name} 
+                <img
+                  src={getImageUrl(selectedProduct.image)}
+                  alt={selectedProduct.name}
                   className={selectedProduct.stock <= 0 ? 'oos-img' : ''}
                 />
               </div>
               <div className="detail-right">
                 <span className="category-tag">{selectedProduct.category || 'General'}</span>
                 <h1>{selectedProduct.name}</h1>
-                
+
                 {/* Stock Warnings */}
                 {selectedProduct.stock <= 0 ? (
                   <p className="stock-alert error">Out of Stock</p>
@@ -104,12 +104,12 @@ export default function Catalog({ token }) {
                 <p className="detail-price">₹{Number(selectedProduct.price).toFixed(2)}</p>
                 <div className="divider"></div>
                 <p className="detail-desc">{selectedProduct.description || "No description provided."}</p>
-                
+
                 <div className="detail-action">
                   {token ? (
-                    <button 
-                      className="primary detail-add-btn" 
-                      onClick={() => handleAdd(selectedProduct.id)} 
+                    <button
+                      className="primary detail-add-btn"
+                      onClick={() => handleAdd(selectedProduct.id)}
                       disabled={addingId === selectedProduct.id || selectedProduct.stock <= 0}
                     >
                       {selectedProduct.stock <= 0 ? 'Unavailable' : addingId === selectedProduct.id ? 'Adding...' : 'Add to Cart'}
@@ -138,12 +138,12 @@ export default function Catalog({ token }) {
 
         <main className="main-content">
           <h2 className="section-title">{selectedCategory}</h2>
-          
+
           <div className="minimal-grid">
             {filteredProducts.map((p) => (
               <div key={p.id} className="minimal-card">
                 <div className={`minimal-image-wrapper ${p.stock <= 0 ? 'oos-wrapper' : ''}`} onClick={() => handleProductClick(p)}>
-                  
+
                   {/* Badges */}
                   {p.stock <= 0 ? (
                     <span className="badge badge-oos">OUT OF STOCK</span>

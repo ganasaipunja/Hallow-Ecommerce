@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-default-key'))
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'hallow-backend.onrender.com', 'hallowfrontend.vercel.app']
 
 # Application definition
 INSTALLED_APPS = [
@@ -41,7 +41,11 @@ MIDDLEWARE = [
 ]
 
 # Vercel nundi requests allow cheyadaniki
-CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://hallowfrontend.vercel.app",
+    "http://localhost:5173",
+]
 
 ROOT_URLCONF = 'config.urls'
 

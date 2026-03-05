@@ -56,7 +56,10 @@ def send_otp_email_api(to_email, otp, subject="Your Verification Code"):
         "htmlContent": f"<html><body><h3>Your code is: <strong>{otp}</strong></h3><p>This code will expire in 10 minutes.</p></body></html>"
     }
 
-    response = requests.post(url, json=payload, headers=headers)
+    try:
+        response = requests.post(url, json=payload, headers=headers, timeout=5)
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Brevo API request failed: {str(e)}")
     
     if response.status_code not in [200, 201, 202]:
         raise Exception(f"Brevo API error: {response.text}")
@@ -75,6 +78,7 @@ def home_view(request):
     
     return Response({
         "message": "Welcome to Hallow Ecommerce API",
+        "storage_backend": getattr(settings, 'DEFAULT_FILE_STORAGE', 'unknown'),
         "banners": banner_ser.data,
         "featured_products": product_ser.data
     })

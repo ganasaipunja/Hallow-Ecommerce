@@ -78,7 +78,6 @@ def home_view(request):
     
     return Response({
         "message": "Welcome to Hallow Ecommerce API",
-        "storage_backend": getattr(settings, 'DEFAULT_FILE_STORAGE', 'unknown'),
         "banners": banner_ser.data,
         "featured_products": product_ser.data
     })

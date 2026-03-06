@@ -1,11 +1,10 @@
+import os
 import random
 import string
 from datetime import timedelta
 from django.utils import timezone
-from django.core.mail import send_mail
 from django.conf import settings
 import requests
-import os
 from rest_framework import status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -15,9 +14,7 @@ from rest_framework.authtoken.models import Token
 # Unified Imports
 from .models import User, Product, Cart, Order, OrderItem, Banner
 from .serializers import (
-    UserRegisterSerializer,
     UserLoginSerializer,
-    OTPSendSerializer,
     OTPVerifySerializer,
     ProductSerializer,
     CartSerializer,
@@ -147,11 +144,11 @@ def otp_send(request):
 
     if email:
         # returns active=False initially
-        user, created = User.objects.get_or_create(
+        user, _ = User.objects.get_or_create(
             email=email,
             defaults={
                 'username': email.split('@')[0],
-                'is_active': False 
+                'is_active': False
             }
         )
         user.otp = otp
@@ -169,7 +166,7 @@ def otp_send(request):
         return Response({'message': 'OTP generated. Check email or database.'})
 
     elif phone:
-        user, created = User.objects.get_or_create(
+        user, _ = User.objects.get_or_create(
             phone=phone,
             defaults={'username': f'user_{phone}', 'is_active': False}
         )

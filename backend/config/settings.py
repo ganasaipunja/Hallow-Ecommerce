@@ -1,4 +1,5 @@
 import os
+import re
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -83,7 +84,7 @@ if os.environ.get('MYSQL_DATABASE'):
                 'charset': 'utf8mb4',
                 # SSL Error (2026) FIX: Self-signed certificate check ni skip chestundi
                 'ssl': {
-                    'ca': None, 
+                    'ca': None,
                 },
             },
         }
@@ -102,8 +103,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER') 
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') 
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 
 AUTH_USER_MODEL = 'api.User'
@@ -113,22 +114,30 @@ EMAIL_TIMEOUT = 30
 # Static and Media files settings
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
 # Cloudinary Storage Configuration
 if os.environ.get('CLOUDINARY_URL'):
-    import re
     # cloudinary://api_key:api_secret@cloud_name
-    match = re.match(r'cloudinary://(?P<api_key>.*):(?P<api_secret>.*)@(?P<cloud_name>.*)', os.environ.get('CLOUDINARY_URL'))
+    match = re.match(r'cloudinary://(?P<api_key>.*):(?P<api_secret>.*)@(?P<cloud_name>.*)',
+                     os.environ.get('CLOUDINARY_URL'))
     if match:
         CLOUDINARY_STORAGE = {
             'CLOUD_NAME': match.group('cloud_name'),
             'API_KEY': match.group('api_key'),
             'API_SECRET': match.group('api_secret'),
         }
-        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        STORAGES["default"]["BACKEND"] = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

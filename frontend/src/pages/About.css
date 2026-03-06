@@ -52,7 +52,7 @@
   border-radius: 50%;   /* This creates the circle shape */
   
   /* Image Styling */
-  background-image: url('abouthallow.png'); /* Updated extension */
+  background-image: url('/abouthallow.png'); /* Updated extension */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

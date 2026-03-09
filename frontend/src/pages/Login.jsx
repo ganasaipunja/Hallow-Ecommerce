@@ -28,9 +28,24 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     setError('');
 
-    // NEW: Confirm password validation
-    if (isRegister && password !== confirmPassword) {
-      return setError("Passwords do not match");
+    // NEW: Strict Password Complexity Validation (Only run on Registration)
+    if (isRegister && !verifyingEmail) {
+      if (password !== confirmPassword) {
+        return setError("Passwords do not match");
+      }
+
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        return setError("Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.");
+      }
+    }
+
+    // NEW: Strict 6-Digit OTP Validation 
+    if ((verifyingEmail || verifyingLogin)) {
+      const otpRegex = /^\d{6}$/;
+      if (!otpRegex.test(otp)) {
+        return setError("OTP must be exactly 6 digits.");
+      }
     }
 
     setLoading(true);
@@ -66,6 +81,15 @@ export default function Login({ onLogin }) {
   async function handleOtpTabSubmit(e) {
     e.preventDefault();
     setError('');
+
+    // NEW: Strict 6-Digit OTP Validation 
+    if (otpSent) {
+      const otpRegex = /^\d{6}$/;
+      if (!otpRegex.test(otp)) {
+        return setError("OTP must be exactly 6 digits.");
+      }
+    }
+
     setLoading(true);
 
     try {

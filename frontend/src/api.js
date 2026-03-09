@@ -42,9 +42,9 @@ export async function login(body) {
   return data;
 }
 
-export async function otpSend(identifier) {
+export async function otpSend(identifier, isRegister = false) {
   const isEmail = identifier.includes('@');
-  const payload = isEmail ? { email: identifier } : { phone: identifier };
+  const payload = isEmail ? { email: identifier, is_register: isRegister } : { phone: identifier };
 
   const res = await fetch(`${BASE}/auth/otp/send/`, {
     method: 'POST',
@@ -52,7 +52,7 @@ export async function otpSend(identifier) {
     body: JSON.stringify(payload),
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.phone?.[0] || data.email?.[0] || 'Failed to send OTP');
+  if (!res.ok) throw new Error(data.error || data.phone?.[0] || data.email?.[0] || 'Failed to send OTP');
   return data;
 }
 

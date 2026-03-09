@@ -139,10 +139,16 @@ def otp_send(request):
     """Handles sending OTP to either Email or Phone."""
     email = request.data.get('email')
     phone = request.data.get('phone')
+    is_register = request.data.get('is_register', False)
     otp = _generate_otp()
     now = timezone.now()
 
     if email:
+        # Prevent sending registration OTPs if user already exists
+        if is_register:
+            if User.objects.filter(email=email, is_active=True).exists():
+                return Response({'error': 'This email is already registered. Please login.'}, status=400)
+                
         # returns active=False initially
         user, _ = User.objects.get_or_create(
             email=email,

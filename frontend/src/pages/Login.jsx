@@ -53,7 +53,7 @@ export default function Login({ onLogin }) {
     try {
       if (isRegister) {
         if (!verifyingEmail) {
-          await otpSend(email);
+          await otpSend(email, true); // NEW: pass true for isRegister
           setVerifyingEmail(true);
           setOtp('');
         } else {
@@ -264,7 +264,14 @@ export default function Login({ onLogin }) {
                 {loading ? 'Please wait...' : (isRegister ? (verifyingEmail ? 'Finalize Account' : 'Register Now') : (verifyingLogin ? 'Verify Identity' : 'Sign In'))}
               </button>
 
-              <button type="button" onClick={() => { setIsRegister(!isRegister); setVerifyingEmail(false); setVerifyingLogin(false); }} style={{ background: 'none', border: 'none', color: '#2563eb', marginTop: '1.2rem', width: '100%', cursor: 'pointer', fontSize: '0.9rem', fontWeight: '600' }}>
+              <button type="button" onClick={() => {
+                setIsRegister(!isRegister);
+                setVerifyingEmail(false);
+                setVerifyingLogin(false);
+                setError('');
+                setPassword('');
+                setConfirmPassword('');
+              }} style={{ background: 'none', border: 'none', color: '#2563eb', marginTop: '1.2rem', width: '100%', cursor: 'pointer', fontSize: '0.9rem', fontWeight: '600' }}>
                 {isRegister ? 'Already have an account? Login' : "Don't have an account? Create Now"}
               </button>
             </form>

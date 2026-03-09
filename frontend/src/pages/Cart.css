@@ -14,7 +14,7 @@
   background: white;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -139,7 +139,8 @@ input[type="radio"] {
 }
 
 .total-summary .primary {
-  background: #10b981; /* Green for success/checkout */
+  background: #10b981;
+  /* Green for success/checkout */
   color: white;
   border: none;
   padding: 14px 40px;
@@ -176,8 +177,9 @@ input[type="radio"] {
     flex-direction: column;
     text-align: center;
     gap: 15px;
+    padding: 20px 0;
   }
-  
+
   .cart-row div {
     flex: unset !important;
     width: 100%;
@@ -185,5 +187,23 @@ input[type="radio"] {
 
   .cart-row div[style*="text-align: right"] {
     text-align: center !important;
+  }
+
+  .cart-row img {
+    margin-bottom: 15px;
+  }
+
+  .total-summary {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .total-summary p {
+    font-size: 1.3rem;
+  }
+
+  .total-summary .primary {
+    width: 100%;
+    padding: 12px;
   }
 }

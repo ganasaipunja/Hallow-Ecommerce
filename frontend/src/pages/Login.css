@@ -11,12 +11,12 @@
   justify-content: center;
   margin: 0;
   padding: 0;
-  
+
   /* Replace URL with your high-res background image */
-  background: linear-gradient(rgba(34, 15, 42, 0.6), rgba(40, 15, 42, 0.6)), 
-              url('/design_1.png') no-repeat center center fixed;
+  background: linear-gradient(rgba(34, 15, 42, 0.6), rgba(40, 15, 42, 0.6)),
+    url('/design_1.png') no-repeat center center fixed;
   background-size: cover;
-  
+
   /* Smooth Fade-In when page loads */
   animation: fadeInBackground 1.2s ease-in-out;
 }
@@ -29,14 +29,14 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   padding: 2.5rem;
   border-radius: 16px;
-  
+
   /* Glassmorphism + Container Background Pattern */
-  background: linear-gradient(rgba(170, 44, 196, 0.9), rgba(221, 180, 219, 0.9)), 
-              url('https://www.transparenttextures.com/patterns/cubes.png'); 
-  
+  background: linear-gradient(rgba(170, 44, 196, 0.9), rgba(221, 180, 219, 0.9)),
+    url('https://www.transparenttextures.com/patterns/cubes.png');
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  
+
   /* Animation: Slide up and fade in */
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -170,12 +170,19 @@ button.primary:disabled {
 
 /* --- KEYFRAMES --- */
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeInBackground {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUpFade {
@@ -183,8 +190,23 @@ button.primary:disabled {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 600px) {
+  .auth-page-wrapper {
+    padding: 20px;
+  }
+
+  .auth-page-wrapper .card {
+    width: 100%;
+    padding: 1.5rem;
   }
 }

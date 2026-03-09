@@ -34,7 +34,8 @@ button {
   transition: all 0.2s ease;
 }
 
-input, button {
+input,
+button {
   padding: 0.5rem 0.75rem;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
@@ -63,7 +64,7 @@ input, button {
 
 .search-form {
   display: flex;
-  flex: 1; 
+  flex: 1;
   max-width: 450px;
   margin: 0 20px;
   border: #f5f3f3;
@@ -103,14 +104,14 @@ nav.navbar a:hover {
 
 .logout-btn {
   background-color: #ffffff;
-  border: 2px solid #ea3333; 
+  border: 2px solid #ea3333;
   padding: 8px 18px;
   border-radius: 6px;
   font-weight: 800;
   cursor: pointer;
   text-transform: uppercase;
   font-size: 14px;
-  
+
   background-image: linear-gradient(45deg, #2563eb, #9333ea, #db2777);
   -webkit-background-clip: text;
   background-clip: text;
@@ -122,7 +123,8 @@ nav.navbar a:hover {
 .logout-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(147, 51, 234, 0.2);
-  border-color: #db2777; /* Border changes color on hover */
+  border-color: #db2777;
+  /* Border changes color on hover */
 }
 
 /* =========================================
@@ -184,4 +186,47 @@ button.primary:hover:not(:disabled) {
 button.primary:disabled {
   background-color: #cbd5e1;
   cursor: not-allowed;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS (GLOBAL)
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* Navbar Adjustments */
+  .navbar {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    gap: 15px;
+    justify-content: space-between;
+  }
+
+  .search-form {
+    order: 3;
+    /* Push search bar to the next row */
+    min-width: 100%;
+    margin: 0;
+  }
+
+  /* Footer Adjustments */
+  .footer {
+    padding: 40px 5% 20px;
+    margin-top: 50px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .newsletter {
+    padding: 40px 5%;
+    margin: 20px 5%;
+  }
+
+  /* Shared UI Adjustments */
+  .container {
+    padding: 0.8rem;
+  }
 }
